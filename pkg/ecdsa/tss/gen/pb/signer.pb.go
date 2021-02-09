@@ -3,65 +3,30 @@
 
 package pb
 
-import (
-	bytes "bytes"
-	fmt "fmt"
-	io "io"
-	math "math"
-	math_bits "math/bits"
-	reflect "reflect"
-	strings "strings"
+import proto "github.com/gogo/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
-	proto "github.com/gogo/protobuf/proto"
-)
+import bytes "bytes"
+
+import strings "strings"
+import reflect "reflect"
+
+import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.
-// A compilation error at this line likely means your copy of the
-// proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
-
 type ThresholdSigner struct {
-	GroupInfo    *ThresholdSigner_GroupInfo `protobuf:"bytes,1,opt,name=groupInfo,proto3" json:"groupInfo,omitempty"`
+	GroupInfo    *ThresholdSigner_GroupInfo `protobuf:"bytes,1,opt,name=groupInfo" json:"groupInfo,omitempty"`
 	ThresholdKey []byte                     `protobuf:"bytes,2,opt,name=thresholdKey,proto3" json:"thresholdKey,omitempty"`
 }
 
-func (m *ThresholdSigner) Reset()      { *m = ThresholdSigner{} }
-func (*ThresholdSigner) ProtoMessage() {}
-func (*ThresholdSigner) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{0}
-}
-func (m *ThresholdSigner) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ThresholdSigner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ThresholdSigner.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ThresholdSigner) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ThresholdSigner.Merge(m, src)
-}
-func (m *ThresholdSigner) XXX_Size() int {
-	return m.Size()
-}
-func (m *ThresholdSigner) XXX_DiscardUnknown() {
-	xxx_messageInfo_ThresholdSigner.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ThresholdSigner proto.InternalMessageInfo
+func (m *ThresholdSigner) Reset()                    { *m = ThresholdSigner{} }
+func (*ThresholdSigner) ProtoMessage()               {}
+func (*ThresholdSigner) Descriptor() ([]byte, []int) { return fileDescriptorSigner, []int{0} }
 
 func (m *ThresholdSigner) GetGroupInfo() *ThresholdSigner_GroupInfo {
 	if m != nil {
@@ -80,41 +45,15 @@ func (m *ThresholdSigner) GetThresholdKey() []byte {
 type ThresholdSigner_GroupInfo struct {
 	GroupID            string   `protobuf:"bytes,1,opt,name=groupID,proto3" json:"groupID,omitempty"`
 	MemberID           []byte   `protobuf:"bytes,2,opt,name=memberID,proto3" json:"memberID,omitempty"`
-	GroupMemberIDs     [][]byte `protobuf:"bytes,3,rep,name=groupMemberIDs,proto3" json:"groupMemberIDs,omitempty"`
+	GroupMemberIDs     [][]byte `protobuf:"bytes,3,rep,name=groupMemberIDs" json:"groupMemberIDs,omitempty"`
 	DishonestThreshold int32    `protobuf:"varint,4,opt,name=dishonestThreshold,proto3" json:"dishonestThreshold,omitempty"`
 }
 
 func (m *ThresholdSigner_GroupInfo) Reset()      { *m = ThresholdSigner_GroupInfo{} }
 func (*ThresholdSigner_GroupInfo) ProtoMessage() {}
 func (*ThresholdSigner_GroupInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{0, 0}
+	return fileDescriptorSigner, []int{0, 0}
 }
-func (m *ThresholdSigner_GroupInfo) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ThresholdSigner_GroupInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ThresholdSigner_GroupInfo.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ThresholdSigner_GroupInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ThresholdSigner_GroupInfo.Merge(m, src)
-}
-func (m *ThresholdSigner_GroupInfo) XXX_Size() int {
-	return m.Size()
-}
-func (m *ThresholdSigner_GroupInfo) XXX_DiscardUnknown() {
-	xxx_messageInfo_ThresholdSigner_GroupInfo.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ThresholdSigner_GroupInfo proto.InternalMessageInfo
 
 func (m *ThresholdSigner_GroupInfo) GetGroupID() string {
 	if m != nil {
@@ -145,48 +84,20 @@ func (m *ThresholdSigner_GroupInfo) GetDishonestThreshold() int32 {
 }
 
 type LocalPartySaveData struct {
-	LocalPreParams *LocalPartySaveData_LocalPreParams `protobuf:"bytes,1,opt,name=localPreParams,proto3" json:"localPreParams,omitempty"`
-	LocalSecrets   *LocalPartySaveData_LocalSecrets   `protobuf:"bytes,2,opt,name=localSecrets,proto3" json:"localSecrets,omitempty"`
-	Ks             [][]byte                           `protobuf:"bytes,3,rep,name=ks,proto3" json:"ks,omitempty"`
-	NTildej        [][]byte                           `protobuf:"bytes,4,rep,name=nTildej,proto3" json:"nTildej,omitempty"`
-	H1J            [][]byte                           `protobuf:"bytes,5,rep,name=h1j,proto3" json:"h1j,omitempty"`
-	H2J            [][]byte                           `protobuf:"bytes,6,rep,name=h2j,proto3" json:"h2j,omitempty"`
-	BigXj          []*LocalPartySaveData_ECPoint      `protobuf:"bytes,7,rep,name=bigXj,proto3" json:"bigXj,omitempty"`
-	PaillierPKs    [][]byte                           `protobuf:"bytes,8,rep,name=paillierPKs,proto3" json:"paillierPKs,omitempty"`
-	EcdsaPub       *LocalPartySaveData_ECPoint        `protobuf:"bytes,9,opt,name=ecdsaPub,proto3" json:"ecdsaPub,omitempty"`
+	LocalPreParams *LocalPartySaveData_LocalPreParams `protobuf:"bytes,1,opt,name=localPreParams" json:"localPreParams,omitempty"`
+	LocalSecrets   *LocalPartySaveData_LocalSecrets   `protobuf:"bytes,2,opt,name=localSecrets" json:"localSecrets,omitempty"`
+	Ks             [][]byte                           `protobuf:"bytes,3,rep,name=ks" json:"ks,omitempty"`
+	NTildej        [][]byte                           `protobuf:"bytes,4,rep,name=nTildej" json:"nTildej,omitempty"`
+	H1J            [][]byte                           `protobuf:"bytes,5,rep,name=h1j" json:"h1j,omitempty"`
+	H2J            [][]byte                           `protobuf:"bytes,6,rep,name=h2j" json:"h2j,omitempty"`
+	BigXj          []*LocalPartySaveData_ECPoint      `protobuf:"bytes,7,rep,name=bigXj" json:"bigXj,omitempty"`
+	PaillierPKs    [][]byte                           `protobuf:"bytes,8,rep,name=paillierPKs" json:"paillierPKs,omitempty"`
+	EcdsaPub       *LocalPartySaveData_ECPoint        `protobuf:"bytes,9,opt,name=ecdsaPub" json:"ecdsaPub,omitempty"`
 }
 
-func (m *LocalPartySaveData) Reset()      { *m = LocalPartySaveData{} }
-func (*LocalPartySaveData) ProtoMessage() {}
-func (*LocalPartySaveData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{1}
-}
-func (m *LocalPartySaveData) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *LocalPartySaveData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_LocalPartySaveData.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *LocalPartySaveData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalPartySaveData.Merge(m, src)
-}
-func (m *LocalPartySaveData) XXX_Size() int {
-	return m.Size()
-}
-func (m *LocalPartySaveData) XXX_DiscardUnknown() {
-	xxx_messageInfo_LocalPartySaveData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_LocalPartySaveData proto.InternalMessageInfo
+func (m *LocalPartySaveData) Reset()                    { *m = LocalPartySaveData{} }
+func (*LocalPartySaveData) ProtoMessage()               {}
+func (*LocalPartySaveData) Descriptor() ([]byte, []int) { return fileDescriptorSigner, []int{1} }
 
 func (m *LocalPartySaveData) GetLocalPreParams() *LocalPartySaveData_LocalPreParams {
 	if m != nil {
@@ -252,7 +163,7 @@ func (m *LocalPartySaveData) GetEcdsaPub() *LocalPartySaveData_ECPoint {
 }
 
 type LocalPartySaveData_LocalPreParams struct {
-	PaillierSK *LocalPartySaveData_LocalPreParams_PrivateKey `protobuf:"bytes,1,opt,name=paillierSK,proto3" json:"paillierSK,omitempty"`
+	PaillierSK *LocalPartySaveData_LocalPreParams_PrivateKey `protobuf:"bytes,1,opt,name=paillierSK" json:"paillierSK,omitempty"`
 	NTilde     []byte                                        `protobuf:"bytes,2,opt,name=nTilde,proto3" json:"nTilde,omitempty"`
 	H1I        []byte                                        `protobuf:"bytes,3,opt,name=h1i,proto3" json:"h1i,omitempty"`
 	H2I        []byte                                        `protobuf:"bytes,4,opt,name=h2i,proto3" json:"h2i,omitempty"`
@@ -265,34 +176,8 @@ type LocalPartySaveData_LocalPreParams struct {
 func (m *LocalPartySaveData_LocalPreParams) Reset()      { *m = LocalPartySaveData_LocalPreParams{} }
 func (*LocalPartySaveData_LocalPreParams) ProtoMessage() {}
 func (*LocalPartySaveData_LocalPreParams) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{1, 0}
+	return fileDescriptorSigner, []int{1, 0}
 }
-func (m *LocalPartySaveData_LocalPreParams) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *LocalPartySaveData_LocalPreParams) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_LocalPartySaveData_LocalPreParams.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *LocalPartySaveData_LocalPreParams) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalPartySaveData_LocalPreParams.Merge(m, src)
-}
-func (m *LocalPartySaveData_LocalPreParams) XXX_Size() int {
-	return m.Size()
-}
-func (m *LocalPartySaveData_LocalPreParams) XXX_DiscardUnknown() {
-	xxx_messageInfo_LocalPartySaveData_LocalPreParams.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_LocalPartySaveData_LocalPreParams proto.InternalMessageInfo
 
 func (m *LocalPartySaveData_LocalPreParams) GetPaillierSK() *LocalPartySaveData_LocalPreParams_PrivateKey {
 	if m != nil {
@@ -361,34 +246,8 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Reset() {
 }
 func (*LocalPartySaveData_LocalPreParams_PrivateKey) ProtoMessage() {}
 func (*LocalPartySaveData_LocalPreParams_PrivateKey) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{1, 0, 0}
+	return fileDescriptorSigner, []int{1, 0, 0}
 }
-func (m *LocalPartySaveData_LocalPreParams_PrivateKey) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *LocalPartySaveData_LocalPreParams_PrivateKey) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_LocalPartySaveData_LocalPreParams_PrivateKey.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *LocalPartySaveData_LocalPreParams_PrivateKey) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalPartySaveData_LocalPreParams_PrivateKey.Merge(m, src)
-}
-func (m *LocalPartySaveData_LocalPreParams_PrivateKey) XXX_Size() int {
-	return m.Size()
-}
-func (m *LocalPartySaveData_LocalPreParams_PrivateKey) XXX_DiscardUnknown() {
-	xxx_messageInfo_LocalPartySaveData_LocalPreParams_PrivateKey.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_LocalPartySaveData_LocalPreParams_PrivateKey proto.InternalMessageInfo
 
 func (m *LocalPartySaveData_LocalPreParams_PrivateKey) GetPublicKey() []byte {
 	if m != nil {
@@ -419,34 +278,8 @@ type LocalPartySaveData_LocalSecrets struct {
 func (m *LocalPartySaveData_LocalSecrets) Reset()      { *m = LocalPartySaveData_LocalSecrets{} }
 func (*LocalPartySaveData_LocalSecrets) ProtoMessage() {}
 func (*LocalPartySaveData_LocalSecrets) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{1, 1}
+	return fileDescriptorSigner, []int{1, 1}
 }
-func (m *LocalPartySaveData_LocalSecrets) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *LocalPartySaveData_LocalSecrets) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_LocalPartySaveData_LocalSecrets.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *LocalPartySaveData_LocalSecrets) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalPartySaveData_LocalSecrets.Merge(m, src)
-}
-func (m *LocalPartySaveData_LocalSecrets) XXX_Size() int {
-	return m.Size()
-}
-func (m *LocalPartySaveData_LocalSecrets) XXX_DiscardUnknown() {
-	xxx_messageInfo_LocalPartySaveData_LocalSecrets.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_LocalPartySaveData_LocalSecrets proto.InternalMessageInfo
 
 func (m *LocalPartySaveData_LocalSecrets) GetXi() []byte {
 	if m != nil {
@@ -470,34 +303,8 @@ type LocalPartySaveData_ECPoint struct {
 func (m *LocalPartySaveData_ECPoint) Reset()      { *m = LocalPartySaveData_ECPoint{} }
 func (*LocalPartySaveData_ECPoint) ProtoMessage() {}
 func (*LocalPartySaveData_ECPoint) Descriptor() ([]byte, []int) {
-	return fileDescriptor_362f9e86e7c5d639, []int{1, 2}
+	return fileDescriptorSigner, []int{1, 2}
 }
-func (m *LocalPartySaveData_ECPoint) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *LocalPartySaveData_ECPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_LocalPartySaveData_ECPoint.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *LocalPartySaveData_ECPoint) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalPartySaveData_ECPoint.Merge(m, src)
-}
-func (m *LocalPartySaveData_ECPoint) XXX_Size() int {
-	return m.Size()
-}
-func (m *LocalPartySaveData_ECPoint) XXX_DiscardUnknown() {
-	xxx_messageInfo_LocalPartySaveData_ECPoint.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_LocalPartySaveData_ECPoint proto.InternalMessageInfo
 
 func (m *LocalPartySaveData_ECPoint) GetX() []byte {
 	if m != nil {
@@ -522,52 +329,6 @@ func init() {
 	proto.RegisterType((*LocalPartySaveData_LocalSecrets)(nil), "tss.LocalPartySaveData.LocalSecrets")
 	proto.RegisterType((*LocalPartySaveData_ECPoint)(nil), "tss.LocalPartySaveData.ECPoint")
 }
-
-func init() { proto.RegisterFile("pb/signer.proto", fileDescriptor_362f9e86e7c5d639) }
-
-var fileDescriptor_362f9e86e7c5d639 = []byte{
-	// 618 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0xcf, 0x6f, 0xd3, 0x30,
-	0x14, 0xc7, 0xeb, 0x74, 0xfd, 0xf5, 0x5a, 0x75, 0xc8, 0x42, 0xc8, 0xaa, 0x90, 0x89, 0x26, 0x98,
-	0x7a, 0x0a, 0x5a, 0x11, 0xd2, 0x24, 0x38, 0xc1, 0x10, 0x4c, 0x1d, 0x53, 0x48, 0x77, 0x98, 0xb8,
-	0x39, 0xad, 0x59, 0xdc, 0xa5, 0x4d, 0x66, 0x67, 0x53, 0x7b, 0xe3, 0x3f, 0x80, 0x2b, 0xff, 0x01,
-	0xff, 0x00, 0x67, 0xae, 0x1c, 0x77, 0xdc, 0x91, 0x65, 0x17, 0x8e, 0xfb, 0x13, 0x50, 0x1c, 0xa7,
-	0xdb, 0xca, 0xcf, 0x9b, 0xbf, 0x9f, 0xbc, 0xf7, 0xfc, 0xfc, 0x7d, 0x76, 0x60, 0x35, 0xf6, 0x1f,
-	0x2a, 0x71, 0x30, 0xe5, 0xd2, 0x89, 0x65, 0x94, 0x44, 0xb8, 0x9c, 0x28, 0xb5, 0xf6, 0xc1, 0x82,
-	0xd5, 0xbd, 0x40, 0x72, 0x15, 0x44, 0xe1, 0x68, 0xa0, 0x3f, 0xe3, 0xa7, 0xd0, 0x38, 0x90, 0xd1,
-	0x71, 0xbc, 0x3d, 0x7d, 0x17, 0x11, 0x64, 0xa3, 0x6e, 0xb3, 0x47, 0x9d, 0x44, 0x29, 0x67, 0x29,
-	0xd0, 0x79, 0x59, 0x44, 0x79, 0x57, 0x09, 0x78, 0x0d, 0x5a, 0x49, 0x11, 0xd7, 0xe7, 0x73, 0x62,
-	0xd9, 0xa8, 0xdb, 0xf2, 0x6e, 0xb0, 0xce, 0x27, 0x04, 0x8d, 0x45, 0x32, 0x26, 0x50, 0xcb, 0xd3,
-	0xb7, 0xf4, 0x6e, 0x0d, 0xaf, 0x90, 0xb8, 0x03, 0xf5, 0x09, 0x9f, 0xf8, 0x5c, 0x6e, 0x6f, 0x99,
-	0x3a, 0x0b, 0x8d, 0xd7, 0xa1, 0xad, 0xc3, 0x5e, 0x1b, 0xa0, 0x48, 0xd9, 0x2e, 0x77, 0x5b, 0xde,
-	0x12, 0xc5, 0x0e, 0xe0, 0x91, 0x50, 0x41, 0x34, 0xe5, 0x2a, 0x59, 0x1c, 0x80, 0xac, 0xd8, 0xa8,
-	0x5b, 0xf1, 0x7e, 0xf3, 0x65, 0xed, 0x4b, 0x15, 0xf0, 0x4e, 0x34, 0x64, 0xa1, 0xcb, 0x64, 0x32,
-	0x1f, 0xb0, 0x13, 0xbe, 0xc5, 0x12, 0x86, 0x77, 0xa1, 0x1d, 0x6a, 0x2a, 0xb9, 0xcb, 0x24, 0x9b,
-	0x28, 0xe3, 0xcc, 0xba, 0x76, 0xe6, 0xd7, 0x04, 0x83, 0x8a, 0x68, 0x6f, 0x29, 0x1b, 0xbf, 0x82,
-	0x96, 0x26, 0x03, 0x3e, 0x94, 0x3c, 0x51, 0xfa, 0x78, 0xcd, 0xde, 0xfd, 0xbf, 0x56, 0x33, 0xb1,
-	0xde, 0x8d, 0x4c, 0xdc, 0x06, 0xeb, 0xb0, 0x38, 0xbc, 0x75, 0xa8, 0x32, 0x3b, 0xa7, 0x7b, 0x22,
-	0x1c, 0xf1, 0x31, 0x59, 0xd1, 0xb0, 0x90, 0xf8, 0x16, 0x94, 0x83, 0x8d, 0x31, 0xa9, 0x68, 0x9a,
-	0x2d, 0x35, 0xe9, 0x8d, 0x49, 0xd5, 0x90, 0xde, 0x18, 0x3f, 0x86, 0x8a, 0x2f, 0x0e, 0xf6, 0xc7,
-	0xa4, 0x66, 0x97, 0xbb, 0xcd, 0xde, 0xbd, 0x3f, 0x35, 0xf4, 0xe2, 0xb9, 0x1b, 0x89, 0x69, 0xe2,
-	0xe5, 0xd1, 0xd8, 0x86, 0x66, 0xcc, 0x44, 0x18, 0x0a, 0x2e, 0xdd, 0xbe, 0x22, 0x75, 0x5d, 0xf0,
-	0x3a, 0xc2, 0x4f, 0xa0, 0xce, 0x87, 0x23, 0xc5, 0xdc, 0x63, 0x9f, 0x34, 0xf4, 0x61, 0xff, 0x59,
-	0x7b, 0x91, 0xd0, 0xf9, 0x6a, 0x41, 0xfb, 0xa6, 0xa1, 0xf8, 0x0d, 0x40, 0x51, 0x7e, 0xd0, 0x37,
-	0xc3, 0xd8, 0xf8, 0xbf, 0x61, 0x38, 0xae, 0x14, 0x27, 0x2c, 0xe1, 0x7d, 0x3e, 0xf7, 0xae, 0x15,
-	0xc1, 0x77, 0xa0, 0x9a, 0x5b, 0x65, 0x2e, 0x9b, 0x51, 0xb9, 0x6f, 0x82, 0x94, 0x35, 0xcc, 0x96,
-	0xb9, 0x6f, 0x42, 0xdf, 0x22, 0xed, 0x9b, 0xc0, 0xb7, 0xa1, 0xc2, 0xc2, 0x38, 0x60, 0xa4, 0xa2,
-	0x59, 0x2e, 0x30, 0x86, 0x15, 0x9f, 0x27, 0x8c, 0x54, 0x35, 0xd4, 0x6b, 0xdc, 0x02, 0x14, 0x93,
-	0x9a, 0x06, 0x28, 0xce, 0xd4, 0x11, 0xa9, 0xe7, 0xea, 0xa8, 0xb3, 0x0f, 0x70, 0xd5, 0x1b, 0xbe,
-	0x0b, 0x8d, 0xf8, 0xd8, 0x0f, 0xc5, 0x30, 0x7b, 0x47, 0x48, 0xc7, 0x5c, 0x81, 0x6c, 0xce, 0x21,
-	0x9b, 0xf8, 0x23, 0xb6, 0x6b, 0xda, 0x2d, 0x64, 0xb6, 0x6b, 0x1c, 0x88, 0x5d, 0xd3, 0xb0, 0x5e,
-	0x77, 0x36, 0xa1, 0xb5, 0xb3, 0x74, 0x6b, 0x66, 0xc2, 0x14, 0xb5, 0x66, 0x22, 0xab, 0xa6, 0x02,
-	0x26, 0xf9, 0xe2, 0xa5, 0x15, 0xb2, 0xf3, 0x00, 0x6a, 0x66, 0x20, 0x59, 0xb3, 0x33, 0x93, 0x83,
-	0x66, 0x99, 0x2a, 0x9e, 0x37, 0x9a, 0x3f, 0xdb, 0x3c, 0x3d, 0xa7, 0xa5, 0xb3, 0x73, 0x5a, 0xba,
-	0x3c, 0xa7, 0xe8, 0x7d, 0x4a, 0xd1, 0xe7, 0x94, 0xa2, 0x6f, 0x29, 0x45, 0xa7, 0x29, 0x45, 0xdf,
-	0x53, 0x8a, 0x7e, 0xa4, 0xb4, 0x74, 0x99, 0x52, 0xf4, 0xf1, 0x82, 0x96, 0x4e, 0x2f, 0x68, 0xe9,
-	0xec, 0x82, 0x96, 0xde, 0x5a, 0xb1, 0xef, 0x57, 0xf5, 0xff, 0xe8, 0xd1, 0xcf, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0x2a, 0x91, 0x3c, 0xcc, 0xa2, 0x04, 0x00, 0x00,
-}
-
 func (this *ThresholdSigner) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -956,7 +717,7 @@ func valueToGoStringSigner(v interface{}, typ string) string {
 func (m *ThresholdSigner) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -964,41 +725,33 @@ func (m *ThresholdSigner) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *ThresholdSigner) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ThresholdSigner) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if len(m.ThresholdKey) > 0 {
-		i -= len(m.ThresholdKey)
-		copy(dAtA[i:], m.ThresholdKey)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.ThresholdKey)))
-		i--
-		dAtA[i] = 0x12
-	}
 	if m.GroupInfo != nil {
-		{
-			size, err := m.GroupInfo.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintSigner(dAtA, i, uint64(size))
-		}
-		i--
 		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(m.GroupInfo.Size()))
+		n1, err := m.GroupInfo.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n1
 	}
-	return len(dAtA) - i, nil
+	if len(m.ThresholdKey) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.ThresholdKey)))
+		i += copy(dAtA[i:], m.ThresholdKey)
+	}
+	return i, nil
 }
 
 func (m *ThresholdSigner_GroupInfo) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -1006,50 +759,42 @@ func (m *ThresholdSigner_GroupInfo) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *ThresholdSigner_GroupInfo) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ThresholdSigner_GroupInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if m.DishonestThreshold != 0 {
-		i = encodeVarintSigner(dAtA, i, uint64(m.DishonestThreshold))
-		i--
-		dAtA[i] = 0x20
-	}
-	if len(m.GroupMemberIDs) > 0 {
-		for iNdEx := len(m.GroupMemberIDs) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.GroupMemberIDs[iNdEx])
-			copy(dAtA[i:], m.GroupMemberIDs[iNdEx])
-			i = encodeVarintSigner(dAtA, i, uint64(len(m.GroupMemberIDs[iNdEx])))
-			i--
-			dAtA[i] = 0x1a
-		}
+	if len(m.GroupID) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.GroupID)))
+		i += copy(dAtA[i:], m.GroupID)
 	}
 	if len(m.MemberID) > 0 {
-		i -= len(m.MemberID)
-		copy(dAtA[i:], m.MemberID)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.MemberID)))
-		i--
 		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.MemberID)))
+		i += copy(dAtA[i:], m.MemberID)
 	}
-	if len(m.GroupID) > 0 {
-		i -= len(m.GroupID)
-		copy(dAtA[i:], m.GroupID)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.GroupID)))
-		i--
-		dAtA[i] = 0xa
+	if len(m.GroupMemberIDs) > 0 {
+		for _, b := range m.GroupMemberIDs {
+			dAtA[i] = 0x1a
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
 	}
-	return len(dAtA) - i, nil
+	if m.DishonestThreshold != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(m.DishonestThreshold))
+	}
+	return i, nil
 }
 
 func (m *LocalPartySaveData) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -1057,117 +802,99 @@ func (m *LocalPartySaveData) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *LocalPartySaveData) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *LocalPartySaveData) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if m.EcdsaPub != nil {
-		{
-			size, err := m.EcdsaPub.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintSigner(dAtA, i, uint64(size))
+	if m.LocalPreParams != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(m.LocalPreParams.Size()))
+		n2, err := m.LocalPreParams.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
 		}
-		i--
-		dAtA[i] = 0x4a
+		i += n2
 	}
-	if len(m.PaillierPKs) > 0 {
-		for iNdEx := len(m.PaillierPKs) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.PaillierPKs[iNdEx])
-			copy(dAtA[i:], m.PaillierPKs[iNdEx])
-			i = encodeVarintSigner(dAtA, i, uint64(len(m.PaillierPKs[iNdEx])))
-			i--
-			dAtA[i] = 0x42
+	if m.LocalSecrets != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(m.LocalSecrets.Size()))
+		n3, err := m.LocalSecrets.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
 		}
+		i += n3
 	}
-	if len(m.BigXj) > 0 {
-		for iNdEx := len(m.BigXj) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.BigXj[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintSigner(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x3a
-		}
-	}
-	if len(m.H2J) > 0 {
-		for iNdEx := len(m.H2J) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.H2J[iNdEx])
-			copy(dAtA[i:], m.H2J[iNdEx])
-			i = encodeVarintSigner(dAtA, i, uint64(len(m.H2J[iNdEx])))
-			i--
-			dAtA[i] = 0x32
-		}
-	}
-	if len(m.H1J) > 0 {
-		for iNdEx := len(m.H1J) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.H1J[iNdEx])
-			copy(dAtA[i:], m.H1J[iNdEx])
-			i = encodeVarintSigner(dAtA, i, uint64(len(m.H1J[iNdEx])))
-			i--
-			dAtA[i] = 0x2a
+	if len(m.Ks) > 0 {
+		for _, b := range m.Ks {
+			dAtA[i] = 0x1a
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
 		}
 	}
 	if len(m.NTildej) > 0 {
-		for iNdEx := len(m.NTildej) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.NTildej[iNdEx])
-			copy(dAtA[i:], m.NTildej[iNdEx])
-			i = encodeVarintSigner(dAtA, i, uint64(len(m.NTildej[iNdEx])))
-			i--
+		for _, b := range m.NTildej {
 			dAtA[i] = 0x22
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
 		}
 	}
-	if len(m.Ks) > 0 {
-		for iNdEx := len(m.Ks) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.Ks[iNdEx])
-			copy(dAtA[i:], m.Ks[iNdEx])
-			i = encodeVarintSigner(dAtA, i, uint64(len(m.Ks[iNdEx])))
-			i--
-			dAtA[i] = 0x1a
+	if len(m.H1J) > 0 {
+		for _, b := range m.H1J {
+			dAtA[i] = 0x2a
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
 		}
 	}
-	if m.LocalSecrets != nil {
-		{
-			size, err := m.LocalSecrets.MarshalToSizedBuffer(dAtA[:i])
+	if len(m.H2J) > 0 {
+		for _, b := range m.H2J {
+			dAtA[i] = 0x32
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
+	}
+	if len(m.BigXj) > 0 {
+		for _, msg := range m.BigXj {
+			dAtA[i] = 0x3a
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
 			if err != nil {
 				return 0, err
 			}
-			i -= size
-			i = encodeVarintSigner(dAtA, i, uint64(size))
+			i += n
 		}
-		i--
-		dAtA[i] = 0x12
 	}
-	if m.LocalPreParams != nil {
-		{
-			size, err := m.LocalPreParams.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintSigner(dAtA, i, uint64(size))
+	if len(m.PaillierPKs) > 0 {
+		for _, b := range m.PaillierPKs {
+			dAtA[i] = 0x42
+			i++
+			i = encodeVarintSigner(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
 		}
-		i--
-		dAtA[i] = 0xa
 	}
-	return len(dAtA) - i, nil
+	if m.EcdsaPub != nil {
+		dAtA[i] = 0x4a
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(m.EcdsaPub.Size()))
+		n4, err := m.EcdsaPub.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n4
+	}
+	return i, nil
 }
 
 func (m *LocalPartySaveData_LocalPreParams) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -1175,83 +902,69 @@ func (m *LocalPartySaveData_LocalPreParams) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *LocalPartySaveData_LocalPreParams) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *LocalPartySaveData_LocalPreParams) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if len(m.Q) > 0 {
-		i -= len(m.Q)
-		copy(dAtA[i:], m.Q)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.Q)))
-		i--
-		dAtA[i] = 0x42
-	}
-	if len(m.P) > 0 {
-		i -= len(m.P)
-		copy(dAtA[i:], m.P)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.P)))
-		i--
-		dAtA[i] = 0x3a
-	}
-	if len(m.Beta) > 0 {
-		i -= len(m.Beta)
-		copy(dAtA[i:], m.Beta)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.Beta)))
-		i--
-		dAtA[i] = 0x32
-	}
-	if len(m.Alpha) > 0 {
-		i -= len(m.Alpha)
-		copy(dAtA[i:], m.Alpha)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.Alpha)))
-		i--
-		dAtA[i] = 0x2a
-	}
-	if len(m.H2I) > 0 {
-		i -= len(m.H2I)
-		copy(dAtA[i:], m.H2I)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.H2I)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.H1I) > 0 {
-		i -= len(m.H1I)
-		copy(dAtA[i:], m.H1I)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.H1I)))
-		i--
-		dAtA[i] = 0x1a
+	if m.PaillierSK != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(m.PaillierSK.Size()))
+		n5, err := m.PaillierSK.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
 	}
 	if len(m.NTilde) > 0 {
-		i -= len(m.NTilde)
-		copy(dAtA[i:], m.NTilde)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.NTilde)))
-		i--
 		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.NTilde)))
+		i += copy(dAtA[i:], m.NTilde)
 	}
-	if m.PaillierSK != nil {
-		{
-			size, err := m.PaillierSK.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintSigner(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
+	if len(m.H1I) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.H1I)))
+		i += copy(dAtA[i:], m.H1I)
 	}
-	return len(dAtA) - i, nil
+	if len(m.H2I) > 0 {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.H2I)))
+		i += copy(dAtA[i:], m.H2I)
+	}
+	if len(m.Alpha) > 0 {
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.Alpha)))
+		i += copy(dAtA[i:], m.Alpha)
+	}
+	if len(m.Beta) > 0 {
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.Beta)))
+		i += copy(dAtA[i:], m.Beta)
+	}
+	if len(m.P) > 0 {
+		dAtA[i] = 0x3a
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.P)))
+		i += copy(dAtA[i:], m.P)
+	}
+	if len(m.Q) > 0 {
+		dAtA[i] = 0x42
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.Q)))
+		i += copy(dAtA[i:], m.Q)
+	}
+	return i, nil
 }
 
 func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -1259,43 +972,35 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Marshal() (dAtA []byte, e
 }
 
 func (m *LocalPartySaveData_LocalPreParams_PrivateKey) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *LocalPartySaveData_LocalPreParams_PrivateKey) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if len(m.PhiN) > 0 {
-		i -= len(m.PhiN)
-		copy(dAtA[i:], m.PhiN)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.PhiN)))
-		i--
-		dAtA[i] = 0x1a
+	if len(m.PublicKey) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.PublicKey)))
+		i += copy(dAtA[i:], m.PublicKey)
 	}
 	if len(m.LambdaN) > 0 {
-		i -= len(m.LambdaN)
-		copy(dAtA[i:], m.LambdaN)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.LambdaN)))
-		i--
 		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.LambdaN)))
+		i += copy(dAtA[i:], m.LambdaN)
 	}
-	if len(m.PublicKey) > 0 {
-		i -= len(m.PublicKey)
-		copy(dAtA[i:], m.PublicKey)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.PublicKey)))
-		i--
-		dAtA[i] = 0xa
+	if len(m.PhiN) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.PhiN)))
+		i += copy(dAtA[i:], m.PhiN)
 	}
-	return len(dAtA) - i, nil
+	return i, nil
 }
 
 func (m *LocalPartySaveData_LocalSecrets) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -1303,36 +1008,29 @@ func (m *LocalPartySaveData_LocalSecrets) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *LocalPartySaveData_LocalSecrets) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *LocalPartySaveData_LocalSecrets) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if len(m.ShareID) > 0 {
-		i -= len(m.ShareID)
-		copy(dAtA[i:], m.ShareID)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.ShareID)))
-		i--
-		dAtA[i] = 0x12
-	}
 	if len(m.Xi) > 0 {
-		i -= len(m.Xi)
-		copy(dAtA[i:], m.Xi)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.Xi)))
-		i--
 		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.Xi)))
+		i += copy(dAtA[i:], m.Xi)
 	}
-	return len(dAtA) - i, nil
+	if len(m.ShareID) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.ShareID)))
+		i += copy(dAtA[i:], m.ShareID)
+	}
+	return i, nil
 }
 
 func (m *LocalPartySaveData_ECPoint) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
@@ -1340,47 +1038,35 @@ func (m *LocalPartySaveData_ECPoint) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *LocalPartySaveData_ECPoint) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *LocalPartySaveData_ECPoint) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
+	var i int
 	_ = i
 	var l int
 	_ = l
-	if len(m.Y) > 0 {
-		i -= len(m.Y)
-		copy(dAtA[i:], m.Y)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.Y)))
-		i--
-		dAtA[i] = 0x12
-	}
 	if len(m.X) > 0 {
-		i -= len(m.X)
-		copy(dAtA[i:], m.X)
-		i = encodeVarintSigner(dAtA, i, uint64(len(m.X)))
-		i--
 		dAtA[i] = 0xa
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.X)))
+		i += copy(dAtA[i:], m.X)
 	}
-	return len(dAtA) - i, nil
+	if len(m.Y) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintSigner(dAtA, i, uint64(len(m.Y)))
+		i += copy(dAtA[i:], m.Y)
+	}
+	return i, nil
 }
 
 func encodeVarintSigner(dAtA []byte, offset int, v uint64) int {
-	offset -= sovSigner(v)
-	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return base
+	return offset + 1
 }
 func (m *ThresholdSigner) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	if m.GroupInfo != nil {
@@ -1395,9 +1081,6 @@ func (m *ThresholdSigner) Size() (n int) {
 }
 
 func (m *ThresholdSigner_GroupInfo) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	l = len(m.GroupID)
@@ -1421,9 +1104,6 @@ func (m *ThresholdSigner_GroupInfo) Size() (n int) {
 }
 
 func (m *LocalPartySaveData) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	if m.LocalPreParams != nil {
@@ -1478,9 +1158,6 @@ func (m *LocalPartySaveData) Size() (n int) {
 }
 
 func (m *LocalPartySaveData_LocalPreParams) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	if m.PaillierSK != nil {
@@ -1519,9 +1196,6 @@ func (m *LocalPartySaveData_LocalPreParams) Size() (n int) {
 }
 
 func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	l = len(m.PublicKey)
@@ -1540,9 +1214,6 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Size() (n int) {
 }
 
 func (m *LocalPartySaveData_LocalSecrets) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	l = len(m.Xi)
@@ -1557,9 +1228,6 @@ func (m *LocalPartySaveData_LocalSecrets) Size() (n int) {
 }
 
 func (m *LocalPartySaveData_ECPoint) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	l = len(m.X)
@@ -1574,7 +1242,14 @@ func (m *LocalPartySaveData_ECPoint) Size() (n int) {
 }
 
 func sovSigner(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozSigner(x uint64) (n int) {
 	return sovSigner(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -1607,11 +1282,6 @@ func (this *LocalPartySaveData) String() string {
 	if this == nil {
 		return "nil"
 	}
-	repeatedStringForBigXj := "[]*LocalPartySaveData_ECPoint{"
-	for _, f := range this.BigXj {
-		repeatedStringForBigXj += strings.Replace(fmt.Sprintf("%v", f), "LocalPartySaveData_ECPoint", "LocalPartySaveData_ECPoint", 1) + ","
-	}
-	repeatedStringForBigXj += "}"
 	s := strings.Join([]string{`&LocalPartySaveData{`,
 		`LocalPreParams:` + strings.Replace(fmt.Sprintf("%v", this.LocalPreParams), "LocalPartySaveData_LocalPreParams", "LocalPartySaveData_LocalPreParams", 1) + `,`,
 		`LocalSecrets:` + strings.Replace(fmt.Sprintf("%v", this.LocalSecrets), "LocalPartySaveData_LocalSecrets", "LocalPartySaveData_LocalSecrets", 1) + `,`,
@@ -1619,7 +1289,7 @@ func (this *LocalPartySaveData) String() string {
 		`NTildej:` + fmt.Sprintf("%v", this.NTildej) + `,`,
 		`H1J:` + fmt.Sprintf("%v", this.H1J) + `,`,
 		`H2J:` + fmt.Sprintf("%v", this.H2J) + `,`,
-		`BigXj:` + repeatedStringForBigXj + `,`,
+		`BigXj:` + strings.Replace(fmt.Sprintf("%v", this.BigXj), "LocalPartySaveData_ECPoint", "LocalPartySaveData_ECPoint", 1) + `,`,
 		`PaillierPKs:` + fmt.Sprintf("%v", this.PaillierPKs) + `,`,
 		`EcdsaPub:` + strings.Replace(fmt.Sprintf("%v", this.EcdsaPub), "LocalPartySaveData_ECPoint", "LocalPartySaveData_ECPoint", 1) + `,`,
 		`}`,
@@ -1700,7 +1370,7 @@ func (m *ThresholdSigner) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1728,7 +1398,7 @@ func (m *ThresholdSigner) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1737,9 +1407,6 @@ func (m *ThresholdSigner) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1764,7 +1431,7 @@ func (m *ThresholdSigner) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1773,9 +1440,6 @@ func (m *ThresholdSigner) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1791,9 +1455,6 @@ func (m *ThresholdSigner) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthSigner
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSigner
 			}
 			if (iNdEx + skippy) > l {
@@ -1823,7 +1484,7 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1851,7 +1512,7 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1861,9 +1522,6 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1883,7 +1541,7 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1892,9 +1550,6 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1917,7 +1572,7 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1926,9 +1581,6 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1949,7 +1601,7 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.DishonestThreshold |= int32(b&0x7F) << shift
+				m.DishonestThreshold |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1961,9 +1613,6 @@ func (m *ThresholdSigner_GroupInfo) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthSigner
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSigner
 			}
 			if (iNdEx + skippy) > l {
@@ -1993,7 +1642,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2021,7 +1670,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2030,9 +1679,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2057,7 +1703,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2066,9 +1712,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2093,7 +1736,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2102,9 +1745,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2125,7 +1765,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2134,9 +1774,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2157,7 +1794,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2166,9 +1803,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2189,7 +1823,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2198,9 +1832,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2221,7 +1852,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2230,9 +1861,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2255,7 +1883,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2264,9 +1892,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2287,7 +1912,7 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2296,9 +1921,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2316,9 +1938,6 @@ func (m *LocalPartySaveData) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthSigner
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSigner
 			}
 			if (iNdEx + skippy) > l {
@@ -2348,7 +1967,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2376,7 +1995,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2385,9 +2004,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2412,7 +2028,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2421,9 +2037,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2446,7 +2059,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2455,9 +2068,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2480,7 +2090,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2489,9 +2099,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2514,7 +2121,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2523,9 +2130,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2548,7 +2152,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2557,9 +2161,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2582,7 +2183,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2591,9 +2192,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2616,7 +2214,7 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2625,9 +2223,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2643,9 +2238,6 @@ func (m *LocalPartySaveData_LocalPreParams) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthSigner
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSigner
 			}
 			if (iNdEx + skippy) > l {
@@ -2675,7 +2267,7 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2703,7 +2295,7 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2712,9 +2304,6 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2737,7 +2326,7 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2746,9 +2335,6 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2771,7 +2357,7 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2780,9 +2366,6 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2798,9 +2381,6 @@ func (m *LocalPartySaveData_LocalPreParams_PrivateKey) Unmarshal(dAtA []byte) er
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthSigner
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSigner
 			}
 			if (iNdEx + skippy) > l {
@@ -2830,7 +2410,7 @@ func (m *LocalPartySaveData_LocalSecrets) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2858,7 +2438,7 @@ func (m *LocalPartySaveData_LocalSecrets) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2867,9 +2447,6 @@ func (m *LocalPartySaveData_LocalSecrets) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2892,7 +2469,7 @@ func (m *LocalPartySaveData_LocalSecrets) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2901,9 +2478,6 @@ func (m *LocalPartySaveData_LocalSecrets) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2919,9 +2493,6 @@ func (m *LocalPartySaveData_LocalSecrets) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthSigner
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSigner
 			}
 			if (iNdEx + skippy) > l {
@@ -2951,7 +2522,7 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2979,7 +2550,7 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2988,9 +2559,6 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3013,7 +2581,7 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3022,9 +2590,6 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSigner
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3042,9 +2607,6 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthSigner
 			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthSigner
-			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3060,7 +2622,6 @@ func (m *LocalPartySaveData_ECPoint) Unmarshal(dAtA []byte) error {
 func skipSigner(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
-	depth := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
@@ -3092,8 +2653,10 @@ func skipSigner(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
+			return iNdEx, nil
 		case 1:
 			iNdEx += 8
+			return iNdEx, nil
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
@@ -3110,34 +2673,98 @@ func skipSigner(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
+			iNdEx += length
 			if length < 0 {
 				return 0, ErrInvalidLengthSigner
 			}
-			iNdEx += length
+			return iNdEx, nil
 		case 3:
-			depth++
-		case 4:
-			if depth == 0 {
-				return 0, ErrUnexpectedEndOfGroupSigner
+			for {
+				var innerWire uint64
+				var start int = iNdEx
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowSigner
+					}
+					if iNdEx >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					innerWire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				innerWireType := int(innerWire & 0x7)
+				if innerWireType == 4 {
+					break
+				}
+				next, err := skipSigner(dAtA[start:])
+				if err != nil {
+					return 0, err
+				}
+				iNdEx = start + next
 			}
-			depth--
+			return iNdEx, nil
+		case 4:
+			return iNdEx, nil
 		case 5:
 			iNdEx += 4
+			return iNdEx, nil
 		default:
 			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
 		}
-		if iNdEx < 0 {
-			return 0, ErrInvalidLengthSigner
-		}
-		if depth == 0 {
-			return iNdEx, nil
-		}
 	}
-	return 0, io.ErrUnexpectedEOF
+	panic("unreachable")
 }
 
 var (
-	ErrInvalidLengthSigner        = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowSigner          = fmt.Errorf("proto: integer overflow")
-	ErrUnexpectedEndOfGroupSigner = fmt.Errorf("proto: unexpected end of group")
+	ErrInvalidLengthSigner = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowSigner   = fmt.Errorf("proto: integer overflow")
 )
+
+func init() { proto.RegisterFile("pb/signer.proto", fileDescriptorSigner) }
+
+var fileDescriptorSigner = []byte{
+	// 610 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0xcf, 0x6f, 0xd3, 0x30,
+	0x14, 0xc7, 0xeb, 0x74, 0xfd, 0xf5, 0x5a, 0x75, 0xc8, 0x42, 0xc8, 0xaa, 0x90, 0x89, 0x26, 0x98,
+	0x7a, 0x0a, 0xac, 0x08, 0x09, 0x09, 0x4e, 0x30, 0x04, 0x53, 0xc7, 0x14, 0xd2, 0x1d, 0x26, 0x6e,
+	0x4e, 0x6b, 0x16, 0x77, 0x69, 0x93, 0xd9, 0xd9, 0xd4, 0xde, 0xf8, 0x0f, 0xe0, 0xca, 0x7f, 0xc0,
+	0x3f, 0xc0, 0x99, 0x2b, 0xc7, 0x1d, 0x39, 0xb2, 0x70, 0xe1, 0xb8, 0x3f, 0x01, 0xc5, 0x71, 0xba,
+	0xb5, 0xfc, 0xbc, 0xf9, 0xfb, 0xc9, 0x7b, 0xcf, 0xcf, 0xdf, 0x67, 0x07, 0xd6, 0x63, 0xff, 0xae,
+	0x12, 0x87, 0x53, 0x2e, 0x9d, 0x58, 0x46, 0x49, 0x84, 0xcb, 0x89, 0x52, 0x1b, 0xef, 0x2c, 0x58,
+	0xdf, 0x0f, 0x24, 0x57, 0x41, 0x14, 0x8e, 0x06, 0xfa, 0x33, 0x7e, 0x0c, 0x8d, 0x43, 0x19, 0x9d,
+	0xc4, 0x3b, 0xd3, 0x37, 0x11, 0x41, 0x36, 0xea, 0x36, 0x7b, 0xd4, 0x49, 0x94, 0x72, 0x56, 0x02,
+	0x9d, 0xe7, 0x45, 0x94, 0x77, 0x99, 0x80, 0x37, 0xa0, 0x95, 0x14, 0x71, 0x7d, 0x3e, 0x27, 0x96,
+	0x8d, 0xba, 0x2d, 0x6f, 0x89, 0x75, 0x3e, 0x20, 0x68, 0x2c, 0x92, 0x31, 0x81, 0x5a, 0x9e, 0xbe,
+	0xad, 0x77, 0x6b, 0x78, 0x85, 0xc4, 0x1d, 0xa8, 0x4f, 0xf8, 0xc4, 0xe7, 0x72, 0x67, 0xdb, 0xd4,
+	0x59, 0x68, 0xbc, 0x09, 0x6d, 0x1d, 0xf6, 0xd2, 0x00, 0x45, 0xca, 0x76, 0xb9, 0xdb, 0xf2, 0x56,
+	0x28, 0x76, 0x00, 0x8f, 0x84, 0x0a, 0xa2, 0x29, 0x57, 0xc9, 0xe2, 0x00, 0x64, 0xcd, 0x46, 0xdd,
+	0x8a, 0xf7, 0x9b, 0x2f, 0x1b, 0x9f, 0xaa, 0x80, 0x77, 0xa3, 0x21, 0x0b, 0x5d, 0x26, 0x93, 0xf9,
+	0x80, 0x9d, 0xf2, 0x6d, 0x96, 0x30, 0xbc, 0x07, 0xed, 0x50, 0x53, 0xc9, 0x5d, 0x26, 0xd9, 0x44,
+	0x19, 0x67, 0x36, 0xb5, 0x33, 0xbf, 0x26, 0x18, 0x54, 0x44, 0x7b, 0x2b, 0xd9, 0xf8, 0x05, 0xb4,
+	0x34, 0x19, 0xf0, 0xa1, 0xe4, 0x89, 0xd2, 0xc7, 0x6b, 0xf6, 0x6e, 0xff, 0xb5, 0x9a, 0x89, 0xf5,
+	0x96, 0x32, 0x71, 0x1b, 0xac, 0xa3, 0xe2, 0xf0, 0xd6, 0x91, 0xca, 0xec, 0x9c, 0xee, 0x8b, 0x70,
+	0xc4, 0xc7, 0x64, 0x4d, 0xc3, 0x42, 0xe2, 0x6b, 0x50, 0x0e, 0xb6, 0xc6, 0xa4, 0xa2, 0x69, 0xb6,
+	0xd4, 0xa4, 0x37, 0x26, 0x55, 0x43, 0x7a, 0x63, 0xfc, 0x00, 0x2a, 0xbe, 0x38, 0x3c, 0x18, 0x93,
+	0x9a, 0x5d, 0xee, 0x36, 0x7b, 0xb7, 0xfe, 0xd4, 0xd0, 0xb3, 0xa7, 0x6e, 0x24, 0xa6, 0x89, 0x97,
+	0x47, 0x63, 0x1b, 0x9a, 0x31, 0x13, 0x61, 0x28, 0xb8, 0x74, 0xfb, 0x8a, 0xd4, 0x75, 0xc1, 0xab,
+	0x08, 0x3f, 0x82, 0x3a, 0x1f, 0x8e, 0x14, 0x73, 0x4f, 0x7c, 0xd2, 0xd0, 0x87, 0xfd, 0x67, 0xed,
+	0x45, 0x42, 0xe7, 0xb3, 0x05, 0xed, 0x65, 0x43, 0xf1, 0x2b, 0x80, 0xa2, 0xfc, 0xa0, 0x6f, 0x86,
+	0xb1, 0xf5, 0x7f, 0xc3, 0x70, 0x5c, 0x29, 0x4e, 0x59, 0xc2, 0xfb, 0x7c, 0xee, 0x5d, 0x29, 0x82,
+	0x6f, 0x40, 0x35, 0xb7, 0xca, 0x5c, 0x36, 0xa3, 0x72, 0xdf, 0x04, 0x29, 0x6b, 0x98, 0x2d, 0x73,
+	0xdf, 0x84, 0xbe, 0x45, 0xda, 0x37, 0x81, 0xaf, 0x43, 0x85, 0x85, 0x71, 0xc0, 0x48, 0x45, 0xb3,
+	0x5c, 0x60, 0x0c, 0x6b, 0x3e, 0x4f, 0x18, 0xa9, 0x6a, 0xa8, 0xd7, 0xb8, 0x05, 0x28, 0x26, 0x35,
+	0x0d, 0x50, 0x9c, 0xa9, 0x63, 0x52, 0xcf, 0xd5, 0x71, 0xe7, 0x00, 0xe0, 0xb2, 0x37, 0x7c, 0x13,
+	0x1a, 0xf1, 0x89, 0x1f, 0x8a, 0x61, 0xf6, 0x8e, 0x90, 0x8e, 0xb9, 0x04, 0xd9, 0x9c, 0x43, 0x36,
+	0xf1, 0x47, 0x6c, 0xcf, 0xb4, 0x5b, 0xc8, 0x6c, 0xd7, 0x38, 0x10, 0x7b, 0xa6, 0x61, 0xbd, 0xee,
+	0x3c, 0x84, 0xd6, 0xee, 0xca, 0xad, 0x99, 0x09, 0x53, 0xd4, 0x9a, 0x89, 0xac, 0x9a, 0x0a, 0x98,
+	0xe4, 0x8b, 0x97, 0x56, 0xc8, 0xce, 0x1d, 0xa8, 0x99, 0x81, 0x64, 0xcd, 0xce, 0x4c, 0x0e, 0x9a,
+	0x65, 0xaa, 0x78, 0xde, 0x68, 0xfe, 0xe4, 0xde, 0xd9, 0x39, 0x2d, 0x7d, 0x3d, 0xa7, 0xa5, 0x8b,
+	0x73, 0x8a, 0xde, 0xa6, 0x14, 0x7d, 0x4c, 0x29, 0xfa, 0x92, 0x52, 0x74, 0x96, 0x52, 0xf4, 0x2d,
+	0xa5, 0xe8, 0x47, 0x4a, 0x4b, 0x17, 0x29, 0x45, 0xef, 0xbf, 0xd3, 0xd2, 0x6b, 0x2b, 0xf6, 0xfd,
+	0xaa, 0xfe, 0x0f, 0xdd, 0xff, 0x19, 0x00, 0x00, 0xff, 0xff, 0x12, 0x99, 0x4d, 0xab, 0x9a, 0x04,
+	0x00, 0x00,
+}
